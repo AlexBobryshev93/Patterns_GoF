@@ -69,9 +69,7 @@ class Box {
     }
 
     public double totalPrice() {
-        double sum = 0;
-        sum += products.stream().mapToDouble(Product::getPrice).sum();
-        sum += boxes.stream().mapToDouble(Box::totalPrice).sum();
-        return sum;
+        return products.stream().mapToDouble(Product::getPrice).sum() +
+                boxes.stream().mapToDouble(Box::totalPrice).sum();
     }
 }
