@@ -12,8 +12,8 @@ public class Main {
 }
 
 class Car { // flyweight objects
-    private String model;
-    private String color;
+    private final String model; // intrinsic property
+    private final String color; // intrinsic property
 
     public Car(String model, String color) {
         this.model = model;
@@ -31,8 +31,8 @@ class Car { // flyweight objects
 
 class MovingCar {
     private Car car;
-    private int x;
-    private int y;
+    private int x; // extrinsic property
+    private int y; // extrinsic property
 
     public MovingCar(Car car) {
         this.car = car;
