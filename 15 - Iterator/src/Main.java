@@ -32,8 +32,7 @@ class StringArrayContainer implements Iterable {
 
         @Override
         public boolean hasNext() {
-            if (index < strings.length) return true;
-            return false;
+            return index < strings.length;
         }
 
         @Override
