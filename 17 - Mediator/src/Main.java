@@ -6,12 +6,13 @@ public class Main {
         Chat chat = new SimpleChat();
         User user1 = new SimpleUser(chat, "User1");
         User user2 = new SimpleUser(chat, "User2");
-        chat.sendMessage("Hello, chat!", user1);
+        user1.sendMessage("Hello, chat!");
     }
 }
 
 interface Chat { // Mediator
     void sendMessage(String msg, User user);
+    void addUser(User user);
 }
 
 interface User {
@@ -24,18 +25,20 @@ class SimpleUser implements User {
     String name;
 
     public SimpleUser(Chat chat, String name) {
+        chat.addUser(this);
         this.chat = chat;
         this.name = name;
     }
 
     @Override
     public void sendMessage(String msg) {
+        System.out.println(this.name + " says");
         chat.sendMessage(msg, this);
     }
 
     @Override
     public void getMessage(String msg) {
-        System.out.println("to " + name + ": " + msg);
+        System.out.println("to " + this.name + ": " + msg);
     }
 }
 
@@ -44,6 +47,13 @@ class SimpleChat implements Chat {
 
     @Override
     public void sendMessage(String msg, User user) {
-        for (User usr : users) usr.getMessage(msg);
+        for (User usr : users) {
+            if (user != usr) usr.getMessage(msg);
+        }
+    }
+
+    @Override
+    public void addUser(User user) {
+        users.add(user);
     }
 }
