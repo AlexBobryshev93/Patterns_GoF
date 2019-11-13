@@ -13,12 +13,9 @@ public class Main {
     }
 }
 
-interface Memento {
-    String getState();
-}
-
 class Originator {
     private String state;
+    private List<Memento> history = new ArrayList<>();
 
     public Originator(String state) {
         this.state = state;
@@ -28,49 +25,46 @@ class Originator {
         return state;
     }
 
+    public List<Memento> getHistory() {
+        return history;
+    }
+
     public void setState(String state) {
         this.state = state;
     }
 
     public Memento save() {
-        return new MementoImpl(state);
+        return new Memento(state);
     }
 
     public void restore(Memento memento) {
-        state = memento.getState();
+        state = memento.state;
     }
 
-    private class MementoImpl implements Memento {
+    class Memento {
         private String state;
 
-        public MementoImpl(String state) {
+        public Memento(String state) {
             this.state = state;
-        }
-
-        @Override
-        public String getState() {
-            return state;
         }
     }
 }
 
 class Caretaker {
     private Originator originator;
-    private List<Memento> history = new ArrayList<>();
 
     public Caretaker(Originator originator) {
         this.originator = originator;
     }
 
     public void doSomething() {
-        history.add(originator.save());
+        originator.getHistory().add(originator.save());
         originator.setState(Character.toString((char) (Math.random() * 128)));
     }
 
     public void unDo() {
-        Memento m = history.get(history.size() - 1);
-        originator.restore(m);
-        history.remove(m);
+        originator.restore(originator.getHistory().get(originator.getHistory().size() - 1));
+        originator.getHistory().remove(originator.getHistory().get(originator.getHistory().size() - 1));
     }
 }
 
