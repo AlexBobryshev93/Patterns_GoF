@@ -6,16 +6,20 @@ public class Main {
         Originator originator = new Originator("default");
         Caretaker caretaker = new Caretaker(originator);
         System.out.println(originator.getState());
-        caretaker.doSomething();
+
+        originator.setState(Character.toString((char) (Math.random() * 128)));
+        caretaker.save();
         System.out.println(originator.getState());
-        caretaker.unDo();
+
+        originator.setState(Character.toString((char) (Math.random() * 128)));
+        System.out.println(originator.getState());
+        caretaker.rollback();
         System.out.println(originator.getState());
     }
 }
 
 class Originator {
     private String state;
-    private List<Memento> history = new ArrayList<>();
 
     public Originator(String state) {
         this.state = state;
@@ -23,10 +27,6 @@ class Originator {
 
     public String getState() {
         return state;
-    }
-
-    public List<Memento> getHistory() {
-        return history;
     }
 
     public void setState(String state) {
@@ -42,9 +42,11 @@ class Originator {
     }
 
     class Memento {
-        private String state;
+        private final Originator originator;
+        private final String state;
 
         public Memento(String state) {
+            originator = Originator.this;
             this.state = state;
         }
     }
@@ -52,19 +54,20 @@ class Originator {
 
 class Caretaker {
     private Originator originator;
+    private List<Originator.Memento> history = new ArrayList<>();
 
     public Caretaker(Originator originator) {
         this.originator = originator;
+        history.add(originator.save());
     }
 
-    public void doSomething() {
-        originator.getHistory().add(originator.save());
-        originator.setState(Character.toString((char) (Math.random() * 128)));
+    public void save() {
+        history.add(originator.save());
     }
 
-    public void unDo() {
-        originator.restore(originator.getHistory().get(originator.getHistory().size() - 1));
-        originator.getHistory().remove(originator.getHistory().get(originator.getHistory().size() - 1));
+    public void rollback() {
+        originator.restore(history.get(history.size() - 1));
+        history.remove(history.get(history.size() - 1));
     }
 }
 
