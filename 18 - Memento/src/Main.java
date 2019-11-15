@@ -58,7 +58,7 @@ class Caretaker {
 
     public Caretaker(Originator originator) {
         this.originator = originator;
-        history.add(originator.save());
+        save();
     }
 
     public void save() {
