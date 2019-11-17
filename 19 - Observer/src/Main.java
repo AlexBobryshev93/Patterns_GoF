@@ -83,12 +83,7 @@ class Publisher {
     }
 
     void unsubscribe(Subscriber subscriber) {
-        for (Subscriber s : subscribers) {
-            if (s == subscriber) {
-                subscribers.remove(subscriber);
-                return;
-            }
-        }
+        subscribers.remove(subscriber);
     }
 
     void notifySubscribers() {
