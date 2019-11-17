@@ -62,6 +62,7 @@ class SubscriberImpl implements Subscriber {
         System.out.println(state);
     }
 }
+
 class Publisher {
     private String state;
     private Set<Subscriber> subscribers = new HashSet<>();
