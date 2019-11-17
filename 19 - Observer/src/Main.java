@@ -9,6 +9,12 @@ public class Main {
 
         subscriber1.subscribe(publisher);
         subscriber2.subscribe(publisher);
+        publisher.notifySubscribers();
+        System.out.println("Subscriber1:");
+        subscriber1.showStatus();
+        System.out.println("Subscriber2:");
+        subscriber2.showStatus();
+
         publisher.setState("updated");
         publisher.notifySubscribers();
         System.out.println("Subscriber1:");
@@ -18,6 +24,7 @@ public class Main {
 
         subscriber2.unsubscribe(publisher);
         publisher.setState("back to default");
+        publisher.notifySubscribers();
         System.out.println("Subscriber1:");
         subscriber1.showStatus();
         System.out.println("Subscriber2:");
@@ -77,7 +84,10 @@ class Publisher {
 
     void unsubscribe(Subscriber subscriber) {
         for (Subscriber s : subscribers) {
-            if (s == subscriber) subscribers.remove(subscriber);
+            if (s == subscriber) {
+                subscribers.remove(subscriber);
+                return;
+            }
         }
     }
 
