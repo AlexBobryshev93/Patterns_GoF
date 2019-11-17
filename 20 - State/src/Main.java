@@ -1,16 +1,19 @@
+/*
+Quite similar to Strategy pattern. But here the State objects themselves can change the context
+and it's State object.
+In Strategy pattern the Context object knows nothing about
+the injected Strategy object. All the Strategy object changes are made from the client code.
+ */
+
 public class Main {
     public static void main(String[] args) {
-        State letterPrinter = new LetterPrinter();
-        State numberPrinter = new NumberPrinter();
-        Context context = new Context(letterPrinter);
+        Context context = new Context();
+        context.setState(new NumberPrinter());
 
         context.doAction();
+        context.changeState();
         context.doAction();
-        context.doAction();
-
-        context.setState(numberPrinter);
-        context.doAction();
-        context.doAction();
+        context.changeState();
         context.doAction();
     }
 }
@@ -36,15 +39,16 @@ class LetterPrinter implements State {
 class Context {
     private State state;
 
-    public Context(State state) {
-        this.state = state;
-    }
-
     public void setState(State state) {
         this.state = state;
     }
 
+    public void changeState() {
+        if (state instanceof LetterPrinter) state = new NumberPrinter();
+        else state = new LetterPrinter();
+    }
+
     public void doAction() {
-        state.print();
+        for (int i = 0; i < 3; i++) state.print();
     }
 }
