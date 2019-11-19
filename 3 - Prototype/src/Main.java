@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) throws CloneNotSupportedException {
         Cash cash = new Cash();
-        cash.setPerson(new Person("Joe"));
+        cash.setPerson(new Person("Joe")); // this person becomes Prototype
         Person person = cash.getPerson();
         System.out.println("The same: " + (person == cash.getPerson()));
     }

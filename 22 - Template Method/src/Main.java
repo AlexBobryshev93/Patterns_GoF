@@ -16,7 +16,7 @@ abstract class DeveloperTrainer {
         System.out.println();
     }
 
-    void learnSchoolMathematics() { // Default method
+    void learnSchoolMathematics() { // Default method; may be set to final
         System.out.println("Learning school maths...");
     }
 

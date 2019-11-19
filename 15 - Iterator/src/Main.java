@@ -1,3 +1,8 @@
+/*
+A well-known example is the Collection Framework.
+This one is almost the same but without generics
+ */
+
 public class Main {
     public static void main(String[] args) {
         Iterable container = new StringArrayContainer(new String[]{"str1", "str2", "str5"});
