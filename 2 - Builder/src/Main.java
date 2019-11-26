@@ -1,5 +1,8 @@
+/*
+Applied when we need too many different constructors. They can be replaced with
+an auxiliary Builder class
+ */
 public class Main {
-
     public static void main(String[] args) {
        Person person = new PersonBuilder().setName("Andy").setAge(19).setSalary(900).build();
        System.out.println(person);

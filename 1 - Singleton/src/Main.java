@@ -1,3 +1,7 @@
+/*
+Applied when we need to provide the creation of only one object of the class
+ */
+
 public class Main {
 
     public static void main(String[] args) {
