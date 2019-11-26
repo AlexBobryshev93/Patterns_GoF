@@ -1,3 +1,6 @@
+/*
+Can be applied only when there are object families (defined in interfaces in this example)
+ */
 public class Main {
     public static void main(String[] args) {
         FurnitureFactory modernFurnitureFactory = new ModernFurnitureFactory();

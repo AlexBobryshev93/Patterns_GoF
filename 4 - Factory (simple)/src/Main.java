@@ -1,3 +1,7 @@
+/*
+It's not a GoF pattern, but it's better to be familiar with it in order to understand
+next 2 patterns
+ */
 public class Main {
     public static void main(String[] args) throws CloneNotSupportedException {
         Factory factory = new Factory();
