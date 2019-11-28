@@ -6,7 +6,7 @@ public class Main {
     }
 }
 
-interface  EuroSocket {
+interface EuroSocket {
     void getPower();
 }
 

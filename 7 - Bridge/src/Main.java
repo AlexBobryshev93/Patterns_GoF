@@ -1,3 +1,7 @@
+/*
+It substitutes the is-a relationship with a has-a and
+thus prevents too high number of classes
+ */
 public class Main {
     public static void main(String[] args) {
         Vehicle car = new Car(new Porsche());
