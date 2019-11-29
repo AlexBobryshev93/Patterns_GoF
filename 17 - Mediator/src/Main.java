@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+This pattern is used when it's better to handle the
+data and events in some intermediate class
+ */
 public class Main {
     public static void main(String[] args) {
         Chat chat = new SimpleChat();
